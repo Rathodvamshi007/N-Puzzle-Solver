@@ -1,35 +1,23 @@
 from environment import Env
 from solver import AStarSolver, BFSSolver, DFSSolver
+from heuristic import get_manhattan_distance, get_linear_conflict
+import time
 
-def get_input():
-    n = int(input())
-    initial = []
-    for i in range(n):
-        row = list(map(int, input().split()))
-        initial.append(row)
-    return initial
+def flatten(state):
+    return [num for row in state for num in row]
+
 def print_path(path):
-    for step in path:
-        for row in step:
-            print(row)
+    for i, step in enumerate(path):
+        print(f"Step {i}:")
+        for j in range(0, len(step), 3):
+          print(list(step[j:j+3]))
         print()
+
 def main():
-    initial = get_input()
+    n = int(input("Size: "))
+    initial = [list(map(int, input().split())) for _ in range(n)]
+
     puzzle = Env(initial)
 
-    choice = int(input())
-
-    if choice == 1:
-        solver = AStarSolver(puzzle)
-    elif choice == 2:
-        solver = BFSSolver(puzzle)
-    elif choice == 3:
-        solver = DFSSolver(puzzle)
-    else:
-        return
-    path = solver.solve()
-if path:
-        print(len(path) - 1)
-        print_path(path)
-    else:
-        print("No solution")
+    print("1.A* 2.BFS 3.DFS")
+    choice = int(input("Choice: "))
