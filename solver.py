@@ -62,7 +62,7 @@ Original file is located at
 """
 
 from collections import deque
-import time
+
 
 class BFSSolver:
     def __init__(self, environment):
@@ -101,7 +101,7 @@ class BFSSolver:
         self.execution_time = time.time() - start_time
         return None, self.nodes_expanded, self.max_frontier_size, self.execution_time
 
-import time
+
 
 class DFSSolver:
     def __init__(self, environment):
